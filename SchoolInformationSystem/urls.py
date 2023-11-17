@@ -18,10 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-from main_app.views import home
+from main_app.views import home, sign_up, StudentSignUpView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
-
+    path('signup/', sign_up, name='signup'),
+    path('accounts/signup/student/', StudentSignUpView.as_view(), name='student_signup')
 ]
