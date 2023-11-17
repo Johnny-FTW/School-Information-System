@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView
 
-from main_app.forms import StudentSignupForm
+from main_app.forms import StudentSignupForm, TeacherSignUpForm
 from main_app.models import User
 
 
@@ -35,4 +35,17 @@ class StudentSignUpView(CreateView):
         return redirect('home')
 
 
+class TeacherSignUpView(CreateView):
+    model = User
+    form_class = TeacherSignUpForm
+    template_name = 'signup.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'teacher'
+        return super().get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('home')
 
