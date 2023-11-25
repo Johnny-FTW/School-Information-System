@@ -3,8 +3,6 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% if request.user.is_authenticated %}
-<strong>{{ request.user.first_name }} {{ request.user.last_name }}</strong>
-{% endif %}
+
 
 {% endblock %}
