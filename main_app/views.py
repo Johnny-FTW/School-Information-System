@@ -1,4 +1,6 @@
 from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -15,6 +17,26 @@ def home(request):
 
 def sign_up(request):
     return render(request, 'register.html')
+
+
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        print(f"request.user: {request.user}")
+        if request.user.is_authenticated:
+            print("User is authenticated. Redirecting to 'home'")
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
+
+
+class CustomLogoutView(LogoutView):
+    def get_next_page(self):
+        next_page = super().get_next_page()
+        if next_page:
+            return next_page
+        else:
+            return 'home'
 
 
 class StudentSignUpView(CreateView):

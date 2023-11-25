@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-from main_app.views import home, sign_up, StudentSignUpView, TeacherSignUpView
+from main_app.views import home, sign_up, StudentSignUpView, TeacherSignUpView, CustomLoginView, CustomLogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +26,6 @@ urlpatterns = [
     path('signup/', sign_up, name='signup'),
     path('accounts/signup/student/', StudentSignUpView.as_view(), name='student_signup'),
     path('accounts/signup/teacher/', TeacherSignUpView.as_view(), name='teacher_signup'),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/login/', CustomLoginView.as_view(), name='login'),
+    path('accounts/logout/', CustomLogoutView.as_view(), name='logout'),
 ]
