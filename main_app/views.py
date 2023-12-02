@@ -68,3 +68,11 @@ class TeacherSignUpView(CreateView):
         login(self.request, user)
         return redirect('home')
 
+
+@login_required
+def my_profile(request):
+    user = User.objects.get(pk=request.user.pk)
+    context = {'user': user}
+    return render(request, 'my_profile.html', context)
+
+
