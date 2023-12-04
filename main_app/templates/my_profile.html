@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}My profile{% endblock %}
 
 {% block content %}
 <h2>{{ user.first_name }} {{ user.last_name }}</h2>
 {% if user.is_student %}
-<h3>{{ user.student.date_of_birth }}</h3>
+<img src="../static/images/6.png" width="50" height="50"/>
+<h3>date of birth: {{ user.student.date_of_birth }}</h3>
+<h3>class: {{ user.student.school_class }}</h3>
 {% endif %}
 
 {% endblock %}

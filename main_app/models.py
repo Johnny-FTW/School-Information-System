@@ -9,17 +9,6 @@ class User(AbstractUser):
     is_teacher = models.BooleanField(default=False)
 
 
-class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    first_name = models.CharField(max_length=200, blank=True)
-    last_name = models.CharField(max_length=200, blank=True)
-    date_of_birth = models.DateField(null=True, blank=True)
-    student_image = models.CharField(max_length=200, null=True, blank=True)
-
-    def __str__(self):
-        return f'{self.first_name} {self.last_name}'
-
-
 class Teacher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=200)
@@ -32,10 +21,32 @@ class Teacher(models.Model):
 class Classroom(models.Model):
     name = models.CharField(max_length=200)
     type = models.CharField(max_length=200)
-    max_capacity = models.IntegerField(max_length=1000)
+    max_capacity = models.IntegerField()
 
     def __str__(self):
         return self.name
+
+
+class Class(models.Model):
+    name = models.CharField(max_length=200)
+    class_teacher = models.OneToOneField(Teacher, on_delete=models.DO_NOTHING)
+    academic_year = models.CharField(max_length=9, help_text="Format: YYYY/YYYY")
+    school_year = models.CharField(max_length=9, help_text="Format: YYYY/YYYY")
+
+    def __str__(self):
+        return self.name
+
+
+class Student(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    first_name = models.CharField(max_length=200, blank=True)
+    last_name = models.CharField(max_length=200, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+    student_image = models.ImageField(max_length=200, null=True, blank=True)
+    school_class = models.ForeignKey(Class, on_delete=models.DO_NOTHING, null=True)
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'
 
 
 class Subject(models.Model):
@@ -45,15 +56,7 @@ class Subject(models.Model):
     classroom = models.ForeignKey(Classroom,on_delete=models.DO_NOTHING)
 
     def __str__(self):
-        return {self.name}
-
-
-class Class(models.Model):
-    name = models.CharField(max_length=200)
-    class_teacher = models.OneToOneField(Teacher, on_delete=models.DO_NOTHING)
-    students = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
-    academic_year = models.CharField(max_length=9, help_text="Format: YYYY/YYYY")
-    school_year = models.CharField(max_length=9, help_text="Format: YYYY/YYYY")
+        return self.name
 
 
 class Exam(models.Model):
