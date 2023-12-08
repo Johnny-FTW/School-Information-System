@@ -42,7 +42,7 @@ class Student(models.Model):
     first_name = models.CharField(max_length=200, blank=True)
     last_name = models.CharField(max_length=200, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
-    student_image = models.ImageField(upload_to='images/', null=True, blank=True)
+    student_image = models.ImageField(upload_to='static/', null=True, blank=True)
     school_class = models.ForeignKey(Class, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
