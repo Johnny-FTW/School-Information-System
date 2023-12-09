@@ -1,5 +1,8 @@
+from PIL import Image
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.contrib import admin
+import os
 
 # Create your models here.
 
@@ -48,6 +51,23 @@ class Student(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
+    def save(self, *args, **kwargs):
+        try:
+            old_instance = Student.objects.get(pk=self.pk)
+            if old_instance.student_image:
+                if self.student_image and old_instance.student_image.path != self.student_image.path:
+                    os.remove(old_instance.student_image.path)
+        except Student.DoesNotExist:
+            pass
+
+        super().save(*args, **kwargs)
+        if self.student_image:
+            img = Image.open(self.student_image.path)
+            if img.height > 300 or img.width > 300:
+                output_size = (300, 300)
+                img.thumbnail(output_size)
+                img.save(self.student_image.path)
+
 
 class Subject(models.Model):
     name = models.CharField(max_length=200)
@@ -68,6 +88,7 @@ class Exam(models.Model):
 
     def __str__(self):
         return f'{self.name}: {self.max_points}/{self.points_achieved}'
+
 
 
 

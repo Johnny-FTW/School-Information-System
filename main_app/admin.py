@@ -12,3 +12,5 @@ admin.site.register(Class)
 admin.site.register(Exam)
 
 
+
+

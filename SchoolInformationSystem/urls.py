@@ -28,5 +28,6 @@ urlpatterns = [
     path('accounts/signup/teacher/', TeacherSignUpView.as_view(), name='teacher_signup'),
     path('accounts/login/', CustomLoginView.as_view(), name='login'),
     path('accounts/logout/', CustomLogoutView.as_view(), name='logout'),
-    path('my_profile/', my_profile, name='my_profile')
+    path('my_profile/', my_profile, name='my_profile'),
+    path('my_profile/update/', ProfileUpdateView.as_view(), name='edit_profile'),
 ]

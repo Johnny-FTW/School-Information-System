@@ -1,14 +1,15 @@
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 # Create your views here.
+from django.urls import reverse_lazy
 
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
-from main_app.forms import StudentSignupForm, TeacherSignUpForm
-from main_app.models import User
+from main_app.forms import StudentSignupForm, TeacherSignUpForm, StudentForm
+from main_app.models import User, Student
 
 
 def home(request):
@@ -75,4 +76,16 @@ def my_profile(request):
     context = {'user': user}
     return render(request, 'my_profile.html', context)
 
+
+class ProfileUpdateView(UpdateView):
+    template_name = 'edit_profile.html'
+    model = Student
+    form_class = StudentForm
+
+    def get_object(self, queryset=None):
+        obj = get_object_or_404(self.model, pk=self.request.user.student.pk)
+        return obj
+
+    def get_success_url(self):
+        return reverse_lazy('my_profile')
 

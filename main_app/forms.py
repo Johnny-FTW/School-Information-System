@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django import forms
 
+
 from .models import *
 
 
@@ -79,3 +80,14 @@ class TeacherSignUpForm(UserCreationForm):
         teacher.save()
 
         return user
+
+
+class StudentForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ('first_name', 'last_name', 'date_of_birth', 'student_image')
+
+    student_image = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': False}))
+
+
+
