@@ -83,11 +83,12 @@ class Exam(models.Model):
     name = models.CharField(max_length=200)
     subject = models.ForeignKey(Subject, on_delete=models.DO_NOTHING)
     student = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
-    max_points = models.IntegerField()
-    points_achieved = models.IntegerField()
+    grade = models.CharField(null=True, max_length=1)
+    max_points = models.IntegerField(blank=True)
+    points_achieved = models.IntegerField(blank=True)
 
     def __str__(self):
-        return f'{self.name}: {self.max_points}/{self.points_achieved}'
+        return f'{self.name}: {self.grade}'
 
 
 
