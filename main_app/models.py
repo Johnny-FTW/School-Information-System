@@ -13,8 +13,7 @@ class User(AbstractUser):
 
 class Teacher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
+    date_of_birth = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -41,8 +40,6 @@ class Class(models.Model):
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    first_name = models.CharField(max_length=200, blank=True)
-    last_name = models.CharField(max_length=200, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     student_image = models.ImageField(upload_to='static/', null=True, blank=True)
     school_class = models.ForeignKey(Class, on_delete=models.DO_NOTHING, null=True)
