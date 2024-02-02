@@ -36,9 +36,7 @@ class StudentSignupForm(UserCreationForm):
 
         if commit:
             user.save()
-        first_name = self.cleaned_data.get("first_name")
-        last_name = self.cleaned_data.get("last_name")
-        student = Student.objects.create(user=user, first_name=first_name, last_name=last_name )
+        student = Student.objects.create(user=user)
         student.save()
 
         return user
@@ -74,9 +72,7 @@ class TeacherSignUpForm(UserCreationForm):
 
         if commit:
             user.save()
-        first_name = self.cleaned_data.get("first_name")
-        last_name = self.cleaned_data.get("last_name")
-        teacher = Teacher.objects.create(user=user, first_name=first_name, last_name=last_name )
+        teacher = Teacher.objects.create(user=user )
         teacher.save()
 
         return user
@@ -85,7 +81,7 @@ class TeacherSignUpForm(UserCreationForm):
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ('first_name', 'last_name', 'date_of_birth', 'student_image')
+        fields = ('date_of_birth', 'student_image')
 
     student_image = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': False}))
 
