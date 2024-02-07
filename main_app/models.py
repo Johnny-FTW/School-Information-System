@@ -17,10 +17,12 @@ class User(AbstractUser):
 class Teacher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     date_of_birth = models.DateField(null=True, blank=True)
-    title = models.CharField(null=True, blank=True)
+    title = models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):
-        return self.user
+        if self.title:
+            return f'{self.title} {self.user.first_name} {self.user.last_name}'
+        return f'{self.user.first_name} {self.user.last_name}'
 
 
 class Classroom(models.Model):
@@ -49,7 +51,7 @@ class Student(models.Model):
     school_class = models.ForeignKey(Class, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
-        return self.user
+        return f'{self.user.first_name} {self.user.last_name}'
 
     def save(self, *args, **kwargs):
         try:

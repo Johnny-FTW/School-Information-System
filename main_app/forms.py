@@ -86,4 +86,10 @@ class StudentForm(forms.ModelForm):
     student_image = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': False}))
 
 
+class TeacherForm(forms.ModelForm):
+    class Meta:
+        model = Teacher
+        fields = ('date_of_birth', 'title')
+
+
 

@@ -4,8 +4,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
-from main_app.forms import StudentSignupForm, TeacherSignUpForm, StudentForm
-from main_app.models import User, Student
+from main_app.forms import StudentSignupForm, TeacherSignUpForm, StudentForm, TeacherForm
+from main_app.models import User, Student, Teacher
 
 
 def home(request):
@@ -73,13 +73,26 @@ def my_profile(request):
     return render(request, 'my_profile.html', context)
 
 
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateViewStudent(UpdateView):
     template_name = 'edit_profile.html'
     model = Student
     form_class = StudentForm
 
     def get_object(self, queryset=None):
         obj = get_object_or_404(self.model, pk=self.request.user.student.pk)
+        return obj
+
+    def get_success_url(self):
+        return reverse_lazy('my_profile')
+
+
+class ProfileUpdateViewTeacher(UpdateView):
+    template_name = 'edit_profile.html'
+    model = Teacher
+    form_class = TeacherForm
+
+    def get_object(self, queryset=None):
+        obj = get_object_or_404(self.model, pk=self.request.user.teacher.pk)
         return obj
 
     def get_success_url(self):
