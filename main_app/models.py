@@ -39,6 +39,7 @@ class Class(models.Model):
     class_teacher = models.OneToOneField(Teacher, on_delete=models.DO_NOTHING)
     academic_year = models.CharField(max_length=9, help_text="Format: YYYY/YYYY")
     school_year = models.CharField(max_length=9, help_text="Format: YYYY/YYYY")
+    base_classroom = models.OneToOneField(Classroom, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.name

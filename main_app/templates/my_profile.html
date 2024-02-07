@@ -3,32 +3,30 @@
 
 {% block content %}
 
-<h2>{{ user.first_name }} {{ user.last_name }}</h2>
+
 {% if user.is_student %}
-{% if user.student.student_image %}
-<img height="200" src="../../{{ user.student.student_image }}" width="200"/>
+    <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+    {% if user.student.student_image %}
+        <img height="200" src="../../{{ user.student.student_image }}" width="200"/>
+    {% else %}
+        <img height="200" src="../../static/blank_profile_picture.jpg" width="200"/>
+    {% endif %}
+    <h3>class: {{ user.student.school_class }}</h3>
+    <h3>date of birth: {{ user.student.date_of_birth }}</h3>
+    <a href="{%url 'edit_profile_student'%}">Edit profile</a>
+
+{% elif user.is_teacher %}
+    {% if user.teacher.title %}
+    <h2>{{ user.teacher.title }} {{ user.first_name }} {{ user.last_name }}</h2>
+    {% else %}
+    <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+    {% endif %}
+    <h3>date of birth: {{ user.teacher.date_of_birth }}</h3>
+    <a href="{%url 'edit_profile_teacher'%}">Edit profile</a>
+
 {% else %}
-<img height="200" src="../../static/blank_profile_picture.jpg" width="200"/>
-{% endif %}
-<h3>class: {{ user.student.school_class }}</h3>
-<h3>date of birth: {{ user.student.date_of_birth }}</h3>
-<a href="{%url 'edit_profile_student'%}">Edit profile</a>
-
-{% elif user_is_teacher %}
-{% if user.teacher.title %}
-<h2>{{ user.teacher.title }} {{ user.first_name }} {{ user.last_name }}</h2>
-{% else %}
-<h2>{{ user.first_name }} {{ user.last_name }}</h2>
-{% endif %}
-<h3>date of birth: {{ user.teacher.date_of_birth }}</h3>
-<a href="{%url 'edit_profile_teacher'%}">Edit profile</a>
-
-{% else %}
-{{ user.email }}
+    {{ user.email }}
 
 {% endif %}
-
-
-
 
 {% endblock %}
