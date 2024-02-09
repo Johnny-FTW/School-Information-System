@@ -94,6 +94,14 @@ class Exam(models.Model):
         return f'{self.name}: {self.grade}'
 
 
+class SubjectSchedule(models.Model):
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    day_of_week = models.CharField(max_length=10)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+
+    class Meta:
+        unique_together = ('subject', 'day_of_week', 'start_time', 'end_time',)
 
 
 
