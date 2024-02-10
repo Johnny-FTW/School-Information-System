@@ -72,7 +72,7 @@ class TeacherSignUpForm(UserCreationForm):
 
         if commit:
             user.save()
-        teacher = Teacher.objects.create(user=user )
+        teacher = Teacher.objects.create(user=user)
         teacher.save()
 
         return user

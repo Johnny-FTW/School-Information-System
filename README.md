@@ -9,5 +9,7 @@ my subjects
 students site
 my classmates from subjects/classes
 my grades from subjects
+my schedule
 
-
+creating users - admin
+dont log after sign

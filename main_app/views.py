@@ -1,5 +1,6 @@
-from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -36,10 +37,11 @@ class CustomLogoutView(LogoutView):
             return 'home'
 
 
-class StudentSignUpView(CreateView):
+class StudentSignUpView(PermissionRequiredMixin, CreateView):
     model = User
     form_class = StudentSignupForm
     template_name = 'signup.html'
+    permission_required = 'main_app.can_sign_up_student'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'student'
@@ -51,10 +53,11 @@ class StudentSignUpView(CreateView):
         return redirect('home')
 
 
-class TeacherSignUpView(CreateView):
+class TeacherSignUpView(PermissionRequiredMixin, CreateView):
     model = User
     form_class = TeacherSignUpForm
     template_name = 'signup.html'
+    permission_required = 'main_app.sign_up'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'teacher'
