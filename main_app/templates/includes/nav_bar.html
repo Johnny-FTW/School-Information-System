@@ -17,9 +17,11 @@
                 <li class="nav-item">
                     <a class="navbar-brand" href="{%url 'logout'%}">Logout</a>
                 </li>
+                {% if user.is_superuser or perms.main_app.add_user %}
                 <li class="nav-item">
-                    <a class="navbar-brand" href="{%url 'signup'%}">Sign Up</a>
+                    <a class="navbar-brand" href="{%url 'register_users'%}">Register users</a>
                 </li>
+                {% endif %}
                 </ul>
             <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                 <li class="nav-item">

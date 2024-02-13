@@ -1,5 +1,4 @@
-from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect, get_object_or_404
@@ -13,7 +12,8 @@ def home(request):
     return render(request, 'home.html')
 
 
-def sign_up(request):
+@permission_required('main_app.add_user')
+def register_users(request):
     return render(request, 'register.html')
 
 
@@ -40,33 +40,31 @@ class CustomLogoutView(LogoutView):
 class StudentSignUpView(PermissionRequiredMixin, CreateView):
     model = User
     form_class = StudentSignupForm
-    template_name = 'signup.html'
-    permission_required = 'main_app.can_sign_up_student'
+    template_name = 'register_users.html'
+    permission_required = ['main_app.add_user', 'main_app.add_student']
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'student'
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect('home')
+        form.save()
+        return redirect('register_users')
 
 
 class TeacherSignUpView(PermissionRequiredMixin, CreateView):
     model = User
     form_class = TeacherSignUpForm
-    template_name = 'signup.html'
-    permission_required = 'main_app.sign_up'
+    template_name = 'register_users.html'
+    permission_required = ['main_app.add_user', 'main_app.add_teacher']
 
     def get_context_data(self, **kwargs):
         kwargs['user_type'] = 'teacher'
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
-        user = form.save()
-        login(self.request, user)
-        return redirect('home')
+        form.save()
+        return redirect('register_users')
 
 
 @login_required

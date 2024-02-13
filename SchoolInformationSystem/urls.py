@@ -23,7 +23,7 @@ from main_app.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
-    path('signup/', sign_up, name='signup'),
+    path('register_users/', register_users, name='register_users'),
     path('accounts/signup/student/', StudentSignUpView.as_view(), name='student_signup'),
     path('accounts/signup/teacher/', TeacherSignUpView.as_view(), name='teacher_signup'),
     path('accounts/login/', CustomLoginView.as_view(), name='login'),
