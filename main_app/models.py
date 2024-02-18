@@ -86,7 +86,7 @@ class Exam(models.Model):
     name = models.CharField(max_length=200)
     subject = models.ForeignKey(Subject, on_delete=models.DO_NOTHING)
     student = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
-    grade = models.CharField(null=True, max_length=1)
+    grade = models.CharField(null=True, max_length=5)
     max_points = models.IntegerField(blank=True)
     points_achieved = models.IntegerField(blank=True)
 

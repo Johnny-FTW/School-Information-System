@@ -92,4 +92,10 @@ class TeacherForm(forms.ModelForm):
         fields = ('date_of_birth', 'title')
 
 
+class ExamForm(forms.ModelForm):
+    class Meta:
+        model = Exam
+        fields = '__all__'
+
+
 

@@ -3,9 +3,9 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView
-from main_app.forms import StudentSignupForm, TeacherSignUpForm, StudentForm, TeacherForm
-from main_app.models import User, Student, Teacher
+from django.views.generic import CreateView, UpdateView, DeleteView
+from main_app.forms import StudentSignupForm, TeacherSignUpForm, StudentForm, TeacherForm, ExamForm
+from main_app.models import User, Student, Teacher, Exam
 
 
 def home(request):
@@ -98,4 +98,33 @@ class ProfileUpdateViewTeacher(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('my_profile')
+
+
+class ExamCreateView(PermissionRequiredMixin, CreateView):
+    template_name = 'new_exam.html'
+    form_class = ExamForm
+    success_url = reverse_lazy('home')
+    permission_required = 'main_app.add_exam'
+
+
+class ExamUpdateView(PermissionRequiredMixin, UpdateView):
+    template_name = 'new_exam.html'
+    model = Exam
+    form_class = ExamForm
+    success_url = reverse_lazy('home')
+    permission_required = 'main_app.edit_exam'
+
+
+class ExamDeleteView(PermissionRequiredMixin, DeleteView):
+    template_name = 'home.html'
+    model = Exam
+    success_url = reverse_lazy('home')
+    permission_required = 'main_app.delete_exam'
+
+
+@login_required
+def exam_detail(request, pk):
+    exam = Exam.objects.get(id=pk)
+    context = {'exam': exam}
+    return render(request, 'exam_detail.html', context)
 
