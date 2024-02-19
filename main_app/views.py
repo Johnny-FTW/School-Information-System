@@ -116,7 +116,7 @@ class ExamUpdateView(PermissionRequiredMixin, UpdateView):
 
 
 class ExamDeleteView(PermissionRequiredMixin, DeleteView):
-    template_name = 'home.html'
+    template_name = 'exam_confirm_delete.html'
     model = Exam
     success_url = reverse_lazy('home')
     permission_required = 'main_app.delete_exam'
@@ -125,6 +125,7 @@ class ExamDeleteView(PermissionRequiredMixin, DeleteView):
 @login_required
 def exam_detail(request, pk):
     exam = Exam.objects.get(id=pk)
-    context = {'exam': exam}
+    teacher = exam.subject.teacher
+    context = {'exam': exam, 'teacher': teacher}
     return render(request, 'exam_detail.html', context)
 

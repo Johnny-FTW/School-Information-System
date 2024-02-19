@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Exam detail{% endblock %}
+
+{% block content %}
+
+
+<h2>{{exam.name}}</h2>
+<h3>subject: {{exam.subject}}</h3>
+<h3>student: {{exam.student}}</h3>
+<h3>grade: {{exam.grade}}</h3>
+{% if exam.max_points and exam.points_achieved %}
+<h3>points: {{exam.max_points}}/{{exam.points_achieved}}</h3>
+{% endif %}
+<h3>teacher: {{teacher.title}} {{teacher.user.first_name}} {{teacher.user.last_name}}</h3>
+<br>
+{% if request.user == teacher.user %}
+<div><a class="btn btn-danger display-4" href="{% url 'delete_exam' pk=exam.id %}">Delete Exam</a></div>
+{% endif %}
+{% endblock %}

@@ -31,5 +31,6 @@ urlpatterns = [
     path('my_profile/update/teacher', ProfileUpdateViewTeacher.as_view(), name='edit_profile_teacher'),
     path('add_exam/', ExamCreateView.as_view(), name='add_exam'),
     path('update_exam/<pk>/', ExamUpdateView.as_view(), name='update_exam'),
-    path('delete_exam/<pk>/', ExamDeleteView.as_view(), name='delete_exam')
+    path('delete_exam/<pk>/', ExamDeleteView.as_view(), name='delete_exam'),
+    path('exam_detail/<pk>/', exam_detail, name='exam_detail')
 ]
