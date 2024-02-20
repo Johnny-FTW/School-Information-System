@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.models import Group
 from django.contrib.auth.views import LoginView, LogoutView
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -63,8 +65,13 @@ class TeacherSignUpView(PermissionRequiredMixin, CreateView):
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
-        form.save()
-        return redirect('register_users')
+        try:
+            user = form.save()
+            teacher_group = Group.objects.get(name='teacher')
+            user.groups.add(teacher_group)
+            return redirect('register_users')
+        except Exception:
+            return HttpResponse("Error: The 'teacher' group does not exist.", status=500)
 
 
 @login_required

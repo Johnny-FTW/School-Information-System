@@ -3,7 +3,8 @@ School Information System
 
 #TODO
 
-add permission to teacher add grades fot their students
+create grades to my subjects
+create grades to my students
 my subjects
 
 students site
