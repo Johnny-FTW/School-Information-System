@@ -148,3 +148,10 @@ def my_subjects(request):
     context = {'my_subjects': my_subjects}
     return render(request, 'my_subjects.html', context)
 
+
+@login_required
+def subject_detail(request, pk):
+    subject = Subject.objects.get(id=pk)
+    context = {'subject': subject}
+    return render(request, 'subject_detail.html', context)
+
