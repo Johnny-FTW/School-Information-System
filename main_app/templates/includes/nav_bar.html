@@ -5,6 +5,7 @@
                 <li class="nav-item">
                     <a class="navbar-brand" href="{%url 'home'%}">Home</a>
                 </li>
+
                 {% if not request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="navbar-brand" href="{%url 'login'%}">Login</a>
@@ -14,23 +15,32 @@
                 <li class="nav-item">
                     <a  class="navbar-brand" href="{%url 'my_profile'%}">My profile</a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="navbar-brand" href="{%url 'logout'%}">Logout</a>
+                    <a  class="navbar-brand" href="{%url 'my_subjects'%}">My subjects</a>
                 </li>
+
                 {% if user.is_superuser or perms.main_app.add_user %}
                 <li class="nav-item">
                     <a class="navbar-brand" href="{%url 'register_users'%}">Register users</a>
                 </li>
                 {% endif %}
+
+                <li class="nav-item">
+                    <a class="navbar-brand" href="{%url 'logout'%}">Logout</a>
+                </li>
                 </ul>
             <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <strong class="">user: {{ request.user.first_name }} {{ request.user.last_name }}</strong>
+                    {% if request.user.is_student %}
+                    <strong class="">student:</strong>
+                    {% elif request.user.is_teacher %}
+                    <strong class="">teacher:</strong>
+                    {% endif %}
+                    <strong class="">{{ request.user.first_name }} {{ request.user.last_name }}</strong>
                 </li>
             </ul>
                 {% endif %}
-
-
         </div>
     </div>
 </nav>

@@ -3,8 +3,8 @@ School Information System
 
 #TODO
 
-create grades to my subjects
-create grades to my students
+create grades only to my subjects
+create grades only to my students
 my subjects
 
 students site
