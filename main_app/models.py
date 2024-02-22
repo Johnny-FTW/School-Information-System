@@ -24,6 +24,10 @@ class Teacher(models.Model):
             return f'{self.title} {self.user.first_name} {self.user.last_name}'
         return f'{self.user.first_name} {self.user.last_name}'
 
+    @property
+    def user_id(self):
+        return self.user.id
+
 
 class Classroom(models.Model):
     name = models.CharField(max_length=200)
@@ -53,6 +57,10 @@ class Student(models.Model):
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
+
+    @property
+    def user_id(self):
+        return self.user.id
 
     def save(self, *args, **kwargs):
         try:

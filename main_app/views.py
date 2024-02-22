@@ -113,6 +113,15 @@ class ExamCreateView(PermissionRequiredMixin, CreateView):
     success_url = reverse_lazy('home')
     permission_required = 'main_app.add_exam'
 
+    def form_valid(self, form):
+        student_id = self.kwargs['student_id']
+        subject_id = self.kwargs['subject_id']
+        subject = Subject.objects.get(id=subject_id)
+        student = Student.objects.get(id=student_id)
+        form.instance.subject = subject
+        form.instance.student = student
+        return super().form_valid(form)
+
 
 class ExamUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'new_exam.html'

@@ -8,11 +8,14 @@
 <h4>students:</h4>
 <ul>
 {% for student in subject.student.all %}
-    <li>{{ student }}</li>
+    <li>{{ student }}
+        {% if request.user.is_teacher %}
+            <a href="{% url 'add_exam' subject.id student.user_id %}">Add Exam</a>
+        {% endif %}
+    </li>
 {% empty %}
     <li>No students assigned</li>
 {% endfor %}
 </ul>
 <h4>classroom: {{subject.classroom}}</h4>
-
 {% endblock %}

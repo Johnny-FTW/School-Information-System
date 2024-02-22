@@ -95,7 +95,7 @@ class TeacherForm(forms.ModelForm):
 class ExamForm(forms.ModelForm):
     class Meta:
         model = Exam
-        fields = '__all__'
+        fields = ['name', 'grade', 'max_points', 'points_achieved']
 
 
 

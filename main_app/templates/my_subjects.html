@@ -4,7 +4,7 @@
 {% block content %}
 
 {% for subject in my_subjects %}
-<h3>{{ subject.name }}</h3>
+<h3><a href="{% url 'subject_detail' subject.id %}">{{ subject.name }}</a></h3>
 {% endfor %}
 
 {% endblock %}
