@@ -3,17 +3,19 @@
 
 {% block content %}
 
-
-<h2>{{exam.name}}</h2>
-<h3>subject: {{exam.subject}}</h3>
-<h3>student: {{exam.student}}</h3>
-<h3>grade: {{exam.grade}}</h3>
+<h3>{{exam.name}}</h3>
+<h4>subject: {{exam.subject}}</h4>
+<h4>student: {{exam.student}}</h4>
+<h4>grade: {{exam.grade}}</h4>
 {% if exam.max_points and exam.points_achieved %}
-<h3>points: {{exam.max_points}}/{{exam.points_achieved}}</h3>
+<h4>points: {{exam.max_points}}/{{exam.points_achieved}}</h4>
 {% endif %}
-<h3>teacher: {{teacher.title}} {{teacher.user.first_name}} {{teacher.user.last_name}}</h3>
+<h4>teacher: {{teacher.title}} {{teacher.user.first_name}} {{teacher.user.last_name}}</h4>
 <br>
 {% if request.user == teacher.user %}
+<div><a class="btn btn-primary display-4" href="{% url 'update_exam' pk=exam.id %}">Edit Exam</a></div>
+<br>
 <div><a class="btn btn-danger display-4" href="{% url 'delete_exam' pk=exam.id %}">Delete Exam</a></div>
 {% endif %}
+
 {% endblock %}

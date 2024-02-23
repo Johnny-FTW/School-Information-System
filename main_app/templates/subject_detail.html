@@ -2,20 +2,26 @@
 {% block title %}Exam detail{% endblock %}
 
 {% block content %}
-
-<h3>{{subject.name}}</h3>
-<h4>teacher: {{subject.teacher}}</h4>
+<h3>{{ subject.name }}</h3>
+<h4>teacher: {{ subject.teacher }}</h4>
 <h4>students:</h4>
 <ul>
 {% for student in subject.student.all %}
     <li>{{ student }}
         {% if request.user.is_teacher %}
             <a href="{% url 'add_exam' subject.id student.user_id %}">Add Exam</a>
+            <br>
+            <h6>Exams:
+            {% for exam in student.exam_set.all %}
+                <a href="{% url 'exam_detail' exam.id %}">{{ exam.name }},</a>
+            {% endfor %}
+            </h6>
+        <br>
         {% endif %}
     </li>
 {% empty %}
     <li>No students assigned</li>
 {% endfor %}
 </ul>
-<h4>classroom: {{subject.classroom}}</h4>
+<h4>classroom: {{ subject.classroom }}</h4>
 {% endblock %}

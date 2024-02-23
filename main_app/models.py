@@ -3,15 +3,16 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 import os
 
-# Create your models here.
-
 
 class User(AbstractUser):
     is_student = models.BooleanField(default=False)
     is_teacher = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.last_name} {self.first_name}'
+
+    class Meta:
+        ordering = ['last_name']
 
 
 class Teacher(models.Model):
@@ -56,7 +57,7 @@ class Student(models.Model):
     school_class = models.ForeignKey(Class, on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
-        return f'{self.user.first_name} {self.user.last_name}'
+        return f'{self.user.last_name} {self.user.first_name}'
 
     @property
     def user_id(self):
@@ -109,7 +110,7 @@ class SubjectSchedule(models.Model):
     end_time = models.TimeField()
 
     class Meta:
-        unique_together = ('subject', 'day_of_week', 'start_time', 'end_time',)
+        unique_together = ('subject', 'day_of_week', 'start_time', 'end_time')
 
 
 

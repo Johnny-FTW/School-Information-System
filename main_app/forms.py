@@ -3,7 +3,7 @@ from django.db import transaction
 from django import forms
 
 
-from .models import *
+from .models import User, Student, Teacher, Exam
 
 
 class StudentSignupForm(UserCreationForm):

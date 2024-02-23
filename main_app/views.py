@@ -117,7 +117,7 @@ class ExamCreateView(PermissionRequiredMixin, CreateView):
         student_id = self.kwargs['student_id']
         subject_id = self.kwargs['subject_id']
         subject = Subject.objects.get(id=subject_id)
-        student = Student.objects.get(id=student_id)
+        student = Student.objects.get(user_id=student_id)
         form.instance.subject = subject
         form.instance.student = student
         return super().form_valid(form)
@@ -128,7 +128,7 @@ class ExamUpdateView(PermissionRequiredMixin, UpdateView):
     model = Exam
     form_class = ExamForm
     success_url = reverse_lazy('home')
-    permission_required = 'main_app.edit_exam'
+    permission_required = 'main_app.change_exam'
 
 
 class ExamDeleteView(PermissionRequiredMixin, DeleteView):
