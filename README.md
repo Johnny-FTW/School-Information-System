@@ -12,8 +12,7 @@ my subjects
 my grades from subjects
 my schedule
 
-
-classroom detail
+exams are shown all...
 
 
 

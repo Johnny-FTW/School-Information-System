@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Exam detail{% endblock %}
+{% block title %}Subject detail{% endblock %}
 
 {% block content %}
 <h3>{{ subject.name }}</h3>
@@ -23,5 +23,5 @@
     <li>No students assigned</li>
 {% endfor %}
 </ul>
-<h4>classroom: {{ subject.classroom }}</h4>
+<h4>classroom: <a href="{% url 'classroom_detail' subject.classroom.id %}">{{ subject.classroom }}</a></h4>
 {% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Classroom detail{% endblock %}
+
+{% block content %}
+
+<h3>{{ classroom.name }}</h3>
+<h4>Type: {{ classroom.type }}</h4>
+<h4>Max capacity: {{ classroom.max_capacity }}</h4>
+
+{% endblock %}

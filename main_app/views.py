@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
 from main_app.forms import StudentSignupForm, TeacherSignUpForm, StudentForm, TeacherForm, ExamForm
-from main_app.models import User, Student, Teacher, Exam, Subject
+from main_app.models import User, Student, Teacher, Exam, Subject, Classroom
 
 
 def home(request):
@@ -163,4 +163,11 @@ def subject_detail(request, pk):
     subject = Subject.objects.get(id=pk)
     context = {'subject': subject}
     return render(request, 'subject_detail.html', context)
+
+
+@login_required
+def classroom_detail(request, pk):
+    classroom = Classroom.objects.get(id=pk)
+    context = {'classroom': classroom}
+    return render(request, 'classroom_detail.html', context)
 
