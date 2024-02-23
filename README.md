@@ -4,8 +4,6 @@ School Information System
 #TODO
 
 
-my subjects
-
 students site
 
 my subjects
