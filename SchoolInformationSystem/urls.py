@@ -31,6 +31,7 @@ urlpatterns = [
     path('my_profile/', my_profile, name='my_profile'),
     path('my_profile/update/student', ProfileUpdateViewStudent.as_view(), name='edit_profile_student'),
     path('my_profile/update/teacher', ProfileUpdateViewTeacher.as_view(), name='edit_profile_teacher'),
+    path('profile/<pk>/', profile, name='profile'),
 
     path('add_exam/<int:subject_id>/<int:student_id>/', ExamCreateView.as_view(), name='add_exam'),
     path('update_exam/<pk>/', ExamUpdateView.as_view(), name='update_exam'),
@@ -39,6 +40,5 @@ urlpatterns = [
 
     path('my_subjects/', my_subjects, name='my_subjects'),
     path('subject_detail/<pk>/', subject_detail, name='subject_detail'),
-
     path('classroom_detail/<pk>/', classroom_detail, name='classroom_detail'),
 ]

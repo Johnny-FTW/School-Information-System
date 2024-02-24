@@ -3,11 +3,11 @@
 
 {% block content %}
 <h3>{{ subject.name }}</h3>
-<h4>teacher: {{ subject.teacher }}</h4>
+<h4>teacher: <a href="{% url 'profile' subject.teacher.user_id %}">{{ subject.teacher }}</a></h4>
 <h4>students:</h4>
 <ul>
 {% for student in subject.student.all %}
-    <li>{{ student }}
+    <li><a href="{% url 'profile' student.user_id %}">{{ student }}</a>
         {% if request.user.is_teacher %}
             <a href="{% url 'add_exam' subject.id student.user_id %}">Add Exam</a>
             <br>

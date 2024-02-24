@@ -81,6 +81,13 @@ def my_profile(request):
     return render(request, 'my_profile.html', context)
 
 
+@login_required
+def profile(request, pk):
+    user = User.objects.get(id=pk)
+    context = {'user': user}
+    return render(request, 'my_profile.html', context)
+
+
 class ProfileUpdateViewStudent(UpdateView):
     template_name = 'edit_profile.html'
     model = Student
