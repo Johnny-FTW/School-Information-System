@@ -168,7 +168,8 @@ def my_subjects(request):
 @login_required
 def subject_detail(request, pk):
     subject = Subject.objects.get(id=pk)
-    context = {'subject': subject}
+    exams = Exam.objects.filter(subject=subject)
+    context = {'subject': subject, 'exams': exams}
     return render(request, 'subject_detail.html', context)
 
 

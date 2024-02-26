@@ -12,8 +12,10 @@
             <a href="{% url 'add_exam' subject.id student.user_id %}">Add Exam</a>
             <br>
             <h6>Exams:
-            {% for exam in student.exam_set.all %}
+            {% for exam in exams %}
+                {% if exam.student == student %}
                 <a href="{% url 'exam_detail' exam.id %}">{{ exam.name }},</a>
+                {% endif %}
             {% endfor %}
             </h6>
         <br>
