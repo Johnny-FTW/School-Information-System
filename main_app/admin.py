@@ -10,7 +10,7 @@ admin.site.register(Classroom)
 admin.site.register(Subject)
 admin.site.register(Class)
 admin.site.register(Exam)
-
+admin.site.register(SubjectSchedule)
 
 
 

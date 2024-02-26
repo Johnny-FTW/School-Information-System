@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
 from main_app.forms import StudentSignupForm, TeacherSignUpForm, StudentForm, TeacherForm, ExamForm
-from main_app.models import User, Student, Teacher, Exam, Subject, Classroom
+from main_app.models import User, Student, Teacher, Exam, Subject, Classroom, SubjectSchedule
 
 
 def home(request):
@@ -117,7 +117,6 @@ class ProfileUpdateViewTeacher(UpdateView):
 class ExamCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'new_exam.html'
     form_class = ExamForm
-    success_url = reverse_lazy('home')
     permission_required = 'main_app.add_exam'
 
     def form_valid(self, form):
@@ -129,20 +128,32 @@ class ExamCreateView(PermissionRequiredMixin, CreateView):
         form.instance.student = student
         return super().form_valid(form)
 
+    def get_success_url(self):
+        subject_id = self.kwargs['subject_id']
+        return reverse_lazy('subject_detail', kwargs={'pk': subject_id})
+
 
 class ExamUpdateView(PermissionRequiredMixin, UpdateView):
     template_name = 'new_exam.html'
     model = Exam
     form_class = ExamForm
-    success_url = reverse_lazy('home')
     permission_required = 'main_app.change_exam'
+
+    def get_success_url(self):
+        exam = self.get_object()
+        subject_id = exam.subject_id
+        return reverse_lazy('subject_detail', kwargs={'pk': subject_id})
 
 
 class ExamDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'exam_confirm_delete.html'
     model = Exam
-    success_url = reverse_lazy('home')
     permission_required = 'main_app.delete_exam'
+
+    def get_success_url(self):
+        exam = self.get_object()
+        subject_id = exam.subject_id
+        return reverse_lazy('subject_detail', kwargs={'pk': subject_id})
 
 
 @login_required
@@ -169,7 +180,8 @@ def my_subjects(request):
 def subject_detail(request, pk):
     subject = Subject.objects.get(id=pk)
     exams = Exam.objects.filter(subject=subject)
-    context = {'subject': subject, 'exams': exams}
+    schedules = SubjectSchedule.objects.filter(subject=subject)
+    context = {'subject': subject, 'exams': exams, 'schedules': schedules}
     return render(request, 'subject_detail.html', context)
 
 

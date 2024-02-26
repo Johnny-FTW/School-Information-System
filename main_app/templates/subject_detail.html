@@ -2,28 +2,43 @@
 {% block title %}Subject detail{% endblock %}
 
 {% block content %}
+
 <h3>{{ subject.name }}</h3>
 <h4>teacher: <a href="{% url 'profile' subject.teacher.user_id %}">{{ subject.teacher }}</a></h4>
 <h4>students:</h4>
 <ul>
-{% for student in subject.student.all %}
-    <li><a href="{% url 'profile' student.user_id %}">{{ student }}</a>
-        {% if request.user.is_teacher %}
-            <a href="{% url 'add_exam' subject.id student.user_id %}">Add Exam</a>
-            <br>
-            <h6>Exams:
-            {% for exam in exams %}
-                {% if exam.student == student %}
-                <a href="{% url 'exam_detail' exam.id %}">{{ exam.name }},</a>
-                {% endif %}
-            {% endfor %}
-            </h6>
-        <br>
-        {% endif %}
-    </li>
-{% empty %}
-    <li>No students assigned</li>
-{% endfor %}
+    {% for student in subject.student.all %}
+        <li>
+            <strong><a href="{% url 'profile' student.user_id %}">{{ student }}</a></strong>
+            {% if request.user.is_teacher %}
+                <a href="{% url 'add_exam' subject.id student.user_id %}">Add Exam</a>
+                <br>
+                <h6>Exams:
+                    {% for exam in exams %}
+                        {% if exam.student == student %}
+                            <a href="{% url 'exam_detail' exam.id %}">{{ exam.name }},</a>
+                        {% endif %}
+                    {% endfor %}
+                </h6>
+                <br>
+            {% endif %}
+        </li>
+    {% empty %}
+        <li>No students assigned</li>
+    {% endfor %}
 </ul>
 <h4>classroom: <a href="{% url 'classroom_detail' subject.classroom.id %}">{{ subject.classroom }}</a></h4>
+<h4>schedule: </h4>
+{% for schedule in schedules %}
+    <h6>{{ schedule.day_of_week}}: {{schedule.start_time}}-{{schedule.end_time}}</h6>
+{% endfor %}
+{% if request.user.is_student %}
+    <h4>my exams:</h4>
+    {% for exam in exams %}
+        {% if exam.student == request.user.student %}
+            <a href="{% url 'exam_detail' exam.id %}">{{ exam.name }},</a>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
 {% endblock %}
