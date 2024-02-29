@@ -167,12 +167,12 @@ def exam_detail(request, pk):
 @login_required
 def my_subjects(request):
     if request.user.is_student:
-        my_subjects = Subject.objects.filter(student=request.user.student)
+        subjects = Subject.objects.filter(student=request.user.student)
     elif request.user.is_teacher:
-        my_subjects = Subject.objects.filter(teacher=request.user.teacher)
+        subjects = Subject.objects.filter(teacher=request.user.teacher)
     else:
-        my_subjects=None
-    context = {'my_subjects': my_subjects}
+        subjects = None
+    context = {'subjects': subjects}
     return render(request, 'my_subjects.html', context)
 
 
@@ -191,3 +191,16 @@ def classroom_detail(request, pk):
     context = {'classroom': classroom}
     return render(request, 'classroom_detail.html', context)
 
+
+@login_required
+def my_schedule(request):
+    if request.user.is_student:
+        subjects = Subject.objects.filter(student=request.user.student)
+        schedule = Subject.objects.filter(subject__in=subjects)
+    elif request.user.is_teacher:
+        subjects = Subject.objects.filter(teacher=request.user.teacher)
+        schedule = Subject.objects.filter(subject__in=subjects)
+    else:
+        schedule = None
+    context = {'schedule': schedule}
+    return render(request, 'my_schedule.html', context)

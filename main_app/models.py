@@ -104,13 +104,21 @@ class Exam(models.Model):
 
 
 class SubjectSchedule(models.Model):
+    DAY_CHOICES = (
+        ('Monday', 'Monday'),
+        ('Tuesday', 'Tuesday'),
+        ('Wednesday', 'Wednesday'),
+        ('Thursday', 'Thursday'),
+        ('Friday', 'Friday')
+    )
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    day_of_week = models.CharField(max_length=10)
+    day_of_week = models.CharField(max_length=10, choices=DAY_CHOICES)
     start_time = models.TimeField()
     end_time = models.TimeField()
 
     class Meta:
         unique_together = ('subject', 'day_of_week', 'start_time', 'end_time')
+        ordering = ['start_time']
 
 
 
