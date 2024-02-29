@@ -70,8 +70,8 @@ class TeacherSignUpView(PermissionRequiredMixin, CreateView):
             teacher_group = Group.objects.get(name='teacher')
             user.groups.add(teacher_group)
             return redirect('register_users')
-        except Exception:
-            return HttpResponse("Error: The 'teacher' group does not exist.", status=500)
+        except Exception as e:
+            return HttpResponse(f"{e} Error: The 'teacher' group does not exist.", status=500)
 
 
 @login_required
@@ -194,13 +194,14 @@ def classroom_detail(request, pk):
 
 @login_required
 def my_schedule(request):
+    days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     if request.user.is_student:
         subjects = Subject.objects.filter(student=request.user.student)
-        schedule = Subject.objects.filter(subject__in=subjects)
+        schedule = SubjectSchedule.objects.filter(subject__in=subjects)
     elif request.user.is_teacher:
         subjects = Subject.objects.filter(teacher=request.user.teacher)
-        schedule = Subject.objects.filter(subject__in=subjects)
+        schedule = SubjectSchedule.objects.filter(subject__in=subjects)
     else:
         schedule = None
-    context = {'schedule': schedule}
+    context = {'schedule': schedule, 'days_of_week': days_of_week}
     return render(request, 'my_schedule.html', context)

@@ -6,31 +6,28 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Day</th>
+      <th scope="col">Subject</th>
+      <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
     </tr>
   </thead>
+
   <tbody>
+    {% for day in days_of_week %}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">{{ day }}</th>
+      {% for entry in schedule %}
+      {% if entry.day_of_week == day %}
+      <tr>
+      <td>{{ entry.subject.name }}</td>
+      <td>{{ entry.start_time }}</td>
+      <td>{{ entry.end_time }}</td>
+      </tr>
+      {% endif %}
+      {% endfor %}
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    {% endfor %}
   </tbody>
 </table>
 

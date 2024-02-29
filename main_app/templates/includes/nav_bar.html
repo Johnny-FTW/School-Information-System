@@ -20,6 +20,10 @@
                     <a  class="navbar-brand" href="{%url 'my_subjects'%}">My subjects</a>
                 </li>
 
+                <li class="nav-item">
+                    <a  class="navbar-brand" href="{%url 'my_schedule'%}">My schedule</a>
+                </li>
+
                 {% if user.is_superuser or perms.main_app.add_user %}
                 <li class="nav-item">
                     <a class="navbar-brand" href="{%url 'register_users'%}">Register users</a>
