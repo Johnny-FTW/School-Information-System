@@ -29,7 +29,7 @@ This is a Django-based School Information System that facilitates the management
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/school-information-system.git
+   git clone https://github.com/Johnny-FTW/School-Information-System.git
 
 2. Navigate to the project directory:
 
