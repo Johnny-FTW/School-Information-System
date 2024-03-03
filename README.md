@@ -1,6 +1,21 @@
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
 # School Information System
 
 This is a Django-based School Information System that facilitates the management of school-related information, including schedules, exams, subjects, and user profiles. The system provides different roles with specific permissions: superuser, teacher, and student.
+
+## Built With
+* [![Python][Python.org]][Python-url]
+* [![Django][Django.com]][Django-url]
+* [![HTML][HTML.com]][HTML-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* [![SQL][SQL.com]][SQL-url]
+
 
 ## Features
 
@@ -86,4 +101,40 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See <a href="https://github.com/Johnny-FTW/School-Information-System/blob/main/LICENSE">`LICENSE`</a> for more information.
+
+
+[Python.org]: https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white
+[Python-url]: https://www.python.org/
+
+[Django.com]: https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white
+[Django-url]: https://www.djangoproject.com/
+
+[HTML.com]: https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white
+[HTML-url]: https://https://html.com//
+
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+
+[SQL.com]: https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white
+[SQL-url]: https://www.sqlite.org/index.html
+
+
+
+[contributors-shield]: https://img.shields.io/github/contributors/Johnny-FTW/School-Information-System.svg?style=for-the-badge
+[contributors-url]: https://github.com/Johnny-FTW/School-Information-System/graphs/contributors
+
+[forks-shield]: https://img.shields.io/github/forks/Johnny-FTW/School-Information-System.svg?style=for-the-badge
+[forks-url]: https://github.com/Johnny-FTW/School-Information-System/network/members
+
+[stars-shield]: https://img.shields.io/github/stars/Johnny-FTW/School-Information-System.svg?style=for-the-badge
+[stars-url]: https://github.com/Johnny-FTW/School-Information-System/stargazers
+
+[issues-shield]: https://img.shields.io/github/issues/Johnny-FTW/School-Information-System.svg?style=for-the-badge
+[issues-url]: https://github.com/Johnny-FTW/School-Information-System/issues
+
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/Johnny-FTW/School-Information-System/blob/main/LICENSE
+
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/jan-hatapka-6b970b205/
