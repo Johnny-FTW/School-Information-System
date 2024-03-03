@@ -111,7 +111,7 @@ This project is licensed under the MIT License. See <a href="https://github.com/
 [Django-url]: https://www.djangoproject.com/
 
 [HTML.com]: https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white
-[HTML-url]: https://https://html.com//
+[HTML-url]: https://html.com/
 
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
