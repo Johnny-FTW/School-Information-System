@@ -84,8 +84,8 @@ This is a Django-based School Information System that facilitates the management
   
 - **Updating Profiles:**
   - All users can update their profiles.
-  -Changes made to profiles are visible to all users.
-  -Students can upload their profile pictures 
+  - Changes made to profiles are visible to all users.
+  - Students can upload their profile pictures 
 
 - **Viewing Information:**
   - Log in as any user (teacher or student).
