@@ -38,7 +38,10 @@ This is a Django-based School Information System that facilitates the management
     - Own classmates
     - Classroom details
     - User profiles
-  
+
+## ER diagram
+![image](ER_diagram.png)
+
 ## Installation
 
 1. Clone the repository:
